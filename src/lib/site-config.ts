@@ -98,6 +98,39 @@ export const siteConfig = {
     ctaLabel: "Devis gratuit",
     ctaHref: "/contactdrone",
   },
+
+  // ─── SEO / vérifications moteurs de recherche / branding ─────────
+  seo: {
+    /** Mots-clés repris dans la balise <meta name="keywords"> du layout. */
+    globalKeywords: [
+      "nettoyage toiture drone",
+      "démoussage drone Pornic",
+      "nettoyage façade drone",
+      "nettoyage panneaux solaires drone",
+      "hydrofuge toiture",
+      "anti-mousse toiture",
+      "télépilote DGAC",
+      "Pornic 44",
+      "Pays de Retz",
+      "Loire-Atlantique",
+      "Saint-Brévin",
+      "La Plaine-sur-Mer",
+      "nettoyage bardage drone",
+      "inspection toiture drone",
+    ] as readonly string[],
+    /** Couleurs marque réutilisées dans les OG images / icônes générées dynamiquement. */
+    brandColors: {
+      primary: "#061a2e",
+      accent: "#f4b400",
+      paper: "#f3f1ec",
+    },
+    /** Handle Twitter (sans @). Vide si pas de compte. */
+    twitterHandle: "" as string,
+    /** Code de vérification Google Search Console (meta google-site-verification). */
+    googleSiteVerification: "" as string,
+    /** Code de vérification Bing Webmaster Tools (meta msvalidate.01). */
+    bingSiteVerification: "" as string,
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;

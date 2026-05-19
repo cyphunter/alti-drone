@@ -48,9 +48,24 @@ export function ServiceTemplate({ slug }: ServiceTemplateProps) {
     name: service.title,
     description: service.description,
     serviceType: service.group,
+    category: service.group,
     url,
     provider: { "@id": `${siteConfig.url}#business` },
     areaServed: zones.slice(0, 12).map((z) => ({ "@type": "City", name: z.name })),
+    audience: {
+      "@type": "Audience",
+      audienceType: "Particuliers, syndics de copropriété, collectivités, professionnels",
+    },
+    serviceOutput: "Rapport photo / vidéo HD remis au client après intervention",
+    termsOfService: canonicalUrl("/mentions-legales"),
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "EUR",
+      availability: "https://schema.org/InStock",
+      url: canonicalUrl("/contactdrone"),
+      areaServed: zones.slice(0, 12).map((z) => z.name),
+      seller: { "@id": `${siteConfig.url}#business` },
+    },
   };
 
   const faqSchema: WithContext<FAQPage> = {

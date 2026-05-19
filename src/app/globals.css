@@ -314,18 +314,23 @@
   50%      { transform: translate3d(4vw, 3vw, 0) scale(1.1); }
 }
 
-/* Gradient text utility */
+/* Gradient text utility
+   Note : padding-inline-end pour éviter que le surplomb des glyphes italiques
+   (Fraunces) soit clippé par la boîte inline — sinon le gradient ne peint
+   pas la pointe droite de la dernière lettre. */
 .gradient-text {
   background: linear-gradient(120deg, var(--color-accent-300) 0%, var(--color-accent-500) 45%, var(--color-accent-700) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding-inline-end: 0.08em;
 }
 .gradient-text-ocean {
   background: linear-gradient(120deg, var(--color-ocean-500) 0%, var(--color-ocean-900) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  padding-inline-end: 0.08em;
 }
 
 /* Shimmer : utilisé sur petits accents (badges, séparateurs) */

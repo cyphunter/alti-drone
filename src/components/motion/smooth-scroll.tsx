@@ -3,6 +3,12 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis | null;
+  }
+}
+
 /**
  * Smooth scroll global via Lenis. Lenis n'est instancié QUE si l'utilisateur
  * n'a pas activé `prefers-reduced-motion` (cf. CLAUDE.md / kinball pattern).
@@ -47,6 +53,7 @@ export function SmoothScroll() {
         wheelMultiplier: 1,
         touchMultiplier: 1.5,
       });
+      window.__lenis = lenis;
       const raf = (time: number) => {
         lenis?.raf(time);
         rafId = requestAnimationFrame(raf);
@@ -63,6 +70,7 @@ export function SmoothScroll() {
       window.removeEventListener("mouseup", onMouseUp);
       lenis?.destroy();
       lenis = null;
+      window.__lenis = null;
       scrollbarDragging = false;
     };
 

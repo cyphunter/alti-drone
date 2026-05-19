@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Instagram, Facebook, Linkedin, Phone, Mail, MapPin, Clock } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
+import { localPages } from "@/data/local-pages";
 
 type NavChild = { label: string; href: string };
 
@@ -134,6 +135,24 @@ export function Footer() {
             <li>
               <FooterLink href="/contactdrone">Contact</FooterLink>
             </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Villes desservies (maillage interne SEO local) */}
+      <div className="relative border-t border-paper/10">
+        <div className="container-soft py-8">
+          <p className="text-xs uppercase tracking-widest text-accent-400">
+            Villes desservies
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-sky-100/85">
+            {localPages.map((lp) => (
+              <li key={lp.slug}>
+                <FooterLink href={`/${lp.slug}`}>
+                  Nettoyage drone à {lp.city}
+                </FooterLink>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

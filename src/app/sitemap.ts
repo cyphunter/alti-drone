@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { serviceSlugs } from "@/data/services";
+import { localPageSlugs } from "@/data/local-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url.replace(/\/+$/, "");
@@ -22,5 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...serviceRoutes];
+  const localRoutes: MetadataRoute.Sitemap = localPageSlugs.map((slug) => ({
+    url: `${base}/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...serviceRoutes, ...localRoutes];
 }

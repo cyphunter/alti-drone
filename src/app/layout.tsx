@@ -1,13 +1,16 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { Inter, Fraunces } from "next/font/google";
 import { siteConfig, canonicalUrl } from "@/lib/site-config";
 import { zones } from "@/data/zones";
+import { services } from "@/data/services";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ReducedMotionProvider } from "@/components/motion/reduced-motion";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { ScrollRestoration } from "@/components/motion/scroll-restoration";
 import { BackToTop } from "@/components/public/back-to-top";
-import type { LocalBusiness, WithContext } from "schema-dts";
+import type { RoofingContractor, WebSite, WithContext } from "schema-dts";
 import "./globals.css";
 
 const fontBody = Inter({
@@ -23,6 +26,10 @@ const fontDisplay = Fraunces({
   axes: ["SOFT", "opsz"],
 });
 
+const twitterHandle = siteConfig.seo.twitterHandle
+  ? `@${siteConfig.seo.twitterHandle.replace(/^@/, "")}`
+  : undefined;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
@@ -34,6 +41,8 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.legal.publisher }],
   creator: siteConfig.legal.publisher,
   publisher: siteConfig.legalName,
+  category: "Services aux particuliers et professionnels",
+  keywords: siteConfig.seo.globalKeywords.join(", "),
   formatDetection: { email: false, address: false, telephone: false },
   alternates: { canonical: canonicalUrl("/") },
   openGraph: {
@@ -43,23 +52,40 @@ export const metadata: Metadata = {
     url: canonicalUrl("/"),
     title: `${siteConfig.name} — ${siteConfig.baseline}`,
     description: siteConfig.description,
-    images: [{ url: "/og-default.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.baseline}`,
     description: siteConfig.description,
-    images: ["/og-default.jpg"],
+    ...(twitterHandle ? { creator: twitterHandle, site: twitterHandle } : {}),
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
   },
-  manifest: "/manifest.webmanifest",
+  ...(siteConfig.seo.googleSiteVerification || siteConfig.seo.bingSiteVerification
+    ? {
+        verification: {
+          ...(siteConfig.seo.googleSiteVerification
+            ? { google: siteConfig.seo.googleSiteVerification }
+            : {}),
+          ...(siteConfig.seo.bingSiteVerification
+            ? { other: { "msvalidate.01": siteConfig.seo.bingSiteVerification } }
+            : {}),
+        },
+      }
+    : {}),
+  // Icons + manifest auto-générés par les conventions Next.js App Router :
+  // - src/app/icon.svg + icon.tsx + apple-icon.tsx (favicons)
+  // - src/app/manifest.ts (manifest PWA)
+  // - src/app/opengraph-image.tsx + twitter-image.tsx (images partagées)
 };
 
 export const viewport: Viewport = {
@@ -71,19 +97,30 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const localBusinessSchema: WithContext<LocalBusiness> = {
+const businessId = `${siteConfig.url}#business`;
+const websiteId = `${siteConfig.url}#website`;
+
+const localBusinessSchema: WithContext<RoofingContractor> = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": `${siteConfig.url}#business`,
+  "@type": "RoofingContractor",
+  "@id": businessId,
   name: siteConfig.legalName,
   alternateName: siteConfig.name,
+  slogan: siteConfig.baseline,
   description: siteConfig.description,
   url: siteConfig.url,
   email: siteConfig.contact.email,
   telephone: siteConfig.contact.phone,
-  image: `${siteConfig.url}/og-default.jpg`,
-  logo: `${siteConfig.url}/icon-512.png`,
+  image: `${siteConfig.url}/opengraph-image`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${siteConfig.url}/icon.svg`,
+    contentUrl: `${siteConfig.url}/icon.svg`,
+  },
   priceRange: "€€",
+  currenciesAccepted: "EUR",
+  paymentAccepted: "Cash, Bank transfer, Credit card",
+  foundingDate: String(siteConfig.legal.foundedYear),
   founder: { "@type": "Person", name: siteConfig.legal.publisher },
   address: {
     "@type": "PostalAddress",
@@ -97,6 +134,15 @@ const localBusinessSchema: WithContext<LocalBusiness> = {
     "@type": "GeoCoordinates",
     latitude: siteConfig.contact.geo.latitude,
     longitude: siteConfig.contact.geo.longitude,
+  },
+  serviceArea: {
+    "@type": "GeoCircle",
+    geoMidpoint: {
+      "@type": "GeoCoordinates",
+      latitude: siteConfig.contact.geo.latitude,
+      longitude: siteConfig.contact.geo.longitude,
+    },
+    geoRadius: String(siteConfig.contact.serviceRadiusKm * 1000),
   },
   areaServed: zones.map((z) => ({
     "@type": "City",
@@ -115,6 +161,44 @@ const localBusinessSchema: WithContext<LocalBusiness> = {
     },
   ],
   sameAs: Object.values(siteConfig.social).filter(Boolean),
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Prestations de nettoyage par drone",
+    itemListElement: services.map((s) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: s.title,
+        description: s.description,
+        url: canonicalUrl(`/${s.slug}`),
+        serviceType: s.group,
+      },
+      priceCurrency: "EUR",
+    })),
+  },
+  knowsAbout: [
+    "Démoussage de toiture par drone",
+    "Traitement hydrofuge toiture",
+    "Anti-mousse curatif et préventif",
+    "Nettoyage de façade par drone",
+    "Nettoyage bardage métallique",
+    "Nettoyage bardage PVC",
+    "Nettoyage panneaux photovoltaïques",
+    "Inspection thermique drone",
+    "Pulvérisation par drone DGAC",
+  ],
+};
+
+const websiteSchema: WithContext<WebSite> = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": websiteId,
+  name: siteConfig.name,
+  alternateName: siteConfig.shortName,
+  url: siteConfig.url,
+  inLanguage: siteConfig.locale,
+  description: siteConfig.description,
+  publisher: { "@id": businessId },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -131,8 +215,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Aller au contenu principal
         </a>
         <JsonLd schema={localBusinessSchema} />
+        <JsonLd schema={websiteSchema} />
         <ReducedMotionProvider>
           <SmoothScroll />
+          <Suspense fallback={null}>
+            <ScrollRestoration />
+          </Suspense>
           <ScrollProgress />
           {children}
           <BackToTop />

@@ -31,7 +31,7 @@ import { FadeUp } from "@/components/motion/text-reveal";
 import { DroneGlyph } from "@/components/motion/drone-glyph";
 
 import { JsonLd } from "@/components/seo/json-ld";
-import type { FAQPage, WithContext } from "schema-dts";
+import type { FAQPage, HowTo, VideoObject, WithContext } from "schema-dts";
 
 export const metadata: Metadata = buildMetadata({
   title: `${siteConfig.name} — Nettoyage toiture par drone à Pornic (44)`,
@@ -50,6 +50,58 @@ export default function HomePage() {
     })),
   };
 
+  const howToSchema: WithContext<HowTo> = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Méthode d'intervention Alti' Drone — nettoyage par drone",
+    description:
+      "4 étapes pour une intervention sécurisée, précise et documentée par drone professionnel.",
+    totalTime: "PT8H",
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Inspection préalable",
+        text: "Survol HD du bâtiment pour cartographier l'encrassement, identifier les éléments fragiles et préparer l'intervention.",
+        url: `${siteConfig.url}/#process`,
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Pulvérisation contrôlée",
+        text: "Application par drone d'un produit anti-mousse, détergent ou hydrofuge, dosé selon le support et l'encrassement.",
+        url: `${siteConfig.url}/#process`,
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Protection longue durée (option)",
+        text: "Application d'un hydrofuge filmogène ou pénétrant pour ralentir le retour des mousses et imperméabiliser le support.",
+        url: `${siteConfig.url}/#process`,
+      },
+      {
+        "@type": "HowToStep",
+        position: 4,
+        name: "Rapport client HD",
+        text: "Remise des photos et vidéos HD de l'inspection et conseils d'entretien pour pérenniser le résultat.",
+        url: `${siteConfig.url}/#process`,
+      },
+    ],
+  };
+
+  const videoSchema: WithContext<VideoObject> = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: heroVideo.title,
+    description:
+      "Démonstration d'une intervention de nettoyage par drone à Pornic — inspection, pulvérisation contrôlée, sans piétinement.",
+    thumbnailUrl: `https://i.ytimg.com/vi/${heroVideo.youtubeId}/maxresdefault.jpg`,
+    embedUrl: `https://www.youtube.com/embed/${heroVideo.youtubeId}`,
+    contentUrl: `https://www.youtube.com/watch?v=${heroVideo.youtubeId}`,
+    uploadDate: `${siteConfig.legal.foundedYear}-01-01`,
+    publisher: { "@id": `${siteConfig.url}#business` },
+  };
+
   const galeriePreview = galerie.slice(0, 6);
   const portrait =
     galerie.find((g) => g.id === "hero-action") ?? galerie[0];
@@ -57,6 +109,8 @@ export default function HomePage() {
   return (
     <>
       <JsonLd schema={faqSchema} />
+      <JsonLd schema={howToSchema} />
+      <JsonLd schema={videoSchema} />
       <Header />
       <main id="main-content">
         {/* ───────────────────────────── HERO CINEMATIC */}
