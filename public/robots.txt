@@ -1,0 +1,5 @@
+# Fallback statique. La vraie configuration est générée dynamiquement par src/app/robots.ts.
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/

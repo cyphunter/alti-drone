@@ -1,0 +1,593 @@
+@import "tailwindcss";
+
+@theme {
+  /* ─── Couleurs ─────────────────────────────────────────────────
+     Palette « Marine pro » — Alti' Drone & Services, Pornic (44).
+     Bleu atlantique profond + ardoise + jaune-drone CTA.
+  */
+  --color-ocean-950: #03101d;
+  --color-ocean-900: #061a2e;
+  --color-ocean-800: #0a2540;
+  --color-ocean-700: #103a5c;
+  --color-ocean-600: #19527e;
+  --color-ocean-500: #2a6da4;
+
+  --color-slate-700: #2f3947;
+  --color-slate-500: #4a5b6e;
+  --color-slate-300: #8395aa;
+
+  --color-sky-300: #cfe3f5;
+  --color-sky-200: #e3eef9;
+  --color-sky-100: #f0f6fc;
+
+  --color-paper: #f3f1ec;
+  --color-bone: #ebe7df;
+  --color-ivory: #faf9f5;
+
+  --color-accent-500: #f4b400;
+  --color-accent-400: #ffc733;
+  --color-accent-300: #ffd766;
+  --color-accent-700: #b88800;
+
+  --color-ink: #050b13;
+  --color-muted: #5b6776;
+  --color-error: #b91c1c;
+  --color-success: #15803d;
+
+  --color-brand: #061a2e;
+  --color-brand-accent: #f4b400;
+
+  /* ─── Typographies (chargées via next/font dans layout.tsx) ── */
+  --font-body: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+
+  /* ─── Radius ────────────────────────────────────────────────── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.75rem;
+  --radius-pill: 9999px;
+
+  /* ─── Shadows ───────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px 0 rgb(6 26 46 / 0.06);
+  --shadow-soft: 0 4px 24px -8px rgb(6 26 46 / 0.18);
+  --shadow-elevated: 0 24px 64px -16px rgb(6 26 46 / 0.32);
+  --shadow-cinema: 0 48px 96px -24px rgb(3 16 29 / 0.55);
+  --shadow-accent-glow: 0 0 40px rgb(244 180 0 / 0.35);
+  --shadow-accent-deep: 0 0 0 1px rgb(244 180 0 / 0.4), 0 24px 48px -16px rgb(244 180 0 / 0.35);
+
+  /* ─── Easings ───────────────────────────────────────────────── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+
+  /* ─── Container width ───────────────────────────────────────── */
+  --container-prose: 65ch;
+}
+
+/* ─── Reset & base ─────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    line-height: 1.6;
+    text-wrap: pretty;
+    background-color: var(--color-paper);
+    color: var(--color-ocean-900);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    font-weight: 500;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-500);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background-color: var(--color-accent-500);
+    color: var(--color-ocean-900);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ─── Utilitaires custom ──────────────────────────────────────── */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: var(--color-accent-700);
+}
+.eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 1px;
+  background-color: var(--color-accent-500);
+}
+.eyebrow--light {
+  color: var(--color-accent-400);
+}
+.eyebrow--light::before {
+  background-color: var(--color-accent-400);
+}
+
+.fluid-h1 {
+  font-size: clamp(2.5rem, 5.5vw + 1rem, 6rem);
+  line-height: 1.02;
+}
+.fluid-display {
+  font-size: clamp(3rem, 8vw + 1rem, 8.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.fluid-h2 {
+  font-size: clamp(2rem, 3.6vw + 0.5rem, 3.75rem);
+  line-height: 1.06;
+}
+.fluid-h3 {
+  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
+}
+.fluid-lead {
+  font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.25rem);
+  line-height: 1.6;
+}
+
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");
+}
+.grain-strong::after {
+  opacity: 0.14;
+}
+
+.section-number {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 400;
+  line-height: 1;
+  background: linear-gradient(180deg, var(--color-accent-300) 0%, var(--color-accent-500) 60%, var(--color-accent-700) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.04em;
+}
+
+.marquee {
+  overflow: hidden;
+  position: relative;
+}
+.marquee__track {
+  display: inline-flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.tech-grid {
+  background-image:
+    linear-gradient(rgb(244 180 0 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(244 180 0 / 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.tech-grid--soft {
+  background-image:
+    linear-gradient(rgb(6 26 46 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(6 26 46 / 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.italic-display {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "opsz" 144;
+}
+
+.container-soft {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  max-width: 80rem;
+}
+@media (min-width: 1024px) {
+  .container-soft { padding-inline: 2.5rem; }
+}
+
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, var(--color-sky-200) 0%, transparent 70%),
+    linear-gradient(180deg, var(--color-paper) 0%, var(--color-bone) 100%);
+}
+
+.section-ocean {
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 0%, var(--color-ocean-700) 0%, var(--color-ocean-900) 70%);
+  color: var(--color-sky-100);
+}
+
+/* ─── Premium additions ───────────────────────────────────────── */
+
+/* Cinematic hero overlay : full-bleed image + voile marine */
+.hero-cinema {
+  background-color: var(--color-ocean-950);
+}
+.hero-cinema__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    /* Voile sombre localisé sur la zone texte (gauche) */
+    radial-gradient(ellipse 70% 80% at 20% 50%, rgb(3 16 29 / 0.80) 0%, rgb(3 16 29 / 0.50) 45%, transparent 75%),
+    /* Voile principal vertical pour lisibilité globale */
+    linear-gradient(180deg, rgb(3 16 29 / 0.55) 0%, rgb(3 16 29 / 0.65) 55%, rgb(3 16 29 / 0.95) 100%),
+    /* Touche d'ambiance bleu / or */
+    radial-gradient(ellipse 70% 50% at 80% 20%, rgb(244 180 0 / 0.18) 0%, transparent 60%);
+}
+
+/* Aurora — léger halo coloré animé pour fonds clairs */
+.aurora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.aurora::before {
+  background: radial-gradient(circle at 30% 30%, var(--color-sky-300), transparent 60%);
+  top: -20vw;
+  left: -10vw;
+  animation: aurora-drift 22s ease-in-out infinite;
+}
+.aurora::after {
+  background: radial-gradient(circle at 70% 70%, rgb(244 180 0 / 0.5), transparent 60%);
+  bottom: -25vw;
+  right: -15vw;
+  animation: aurora-drift 28s ease-in-out infinite reverse;
+}
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(4vw, 3vw, 0) scale(1.1); }
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(120deg, var(--color-accent-300) 0%, var(--color-accent-500) 45%, var(--color-accent-700) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.gradient-text-ocean {
+  background: linear-gradient(120deg, var(--color-ocean-500) 0%, var(--color-ocean-900) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Shimmer : utilisé sur petits accents (badges, séparateurs) */
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    transparent 40%,
+    rgb(255 215 102 / 0.55) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3.6s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* Glass card — subtil, sur fond image/ocean */
+.glass {
+  background: rgb(243 241 236 / 0.10);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgb(243 241 236 / 0.18);
+}
+.glass-dark {
+  background: rgb(3 16 29 / 0.55);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgb(243 241 236 / 0.10);
+}
+
+/* Bordure dorée animée (conic) sur hover wrapper */
+.gradient-ring {
+  position: relative;
+  isolation: isolate;
+}
+.gradient-ring::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--ring-angle, 0deg),
+    transparent 0deg,
+    var(--color-accent-500) 60deg,
+    var(--color-accent-300) 120deg,
+    transparent 180deg,
+    transparent 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+@property --ring-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.gradient-ring:hover::before,
+.gradient-ring:focus-visible::before {
+  opacity: 1;
+  animation: ring-spin 6s linear infinite;
+}
+@keyframes ring-spin {
+  to { --ring-angle: 360deg; }
+}
+
+/* Float — flottement très léger pour badges */
+.float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Drone propeller — petites animations de rotation pour SVG */
+.spin-slow {
+  animation: spin 14s linear infinite;
+  transform-origin: center;
+}
+.spin-fast {
+  animation: spin 0.18s linear infinite;
+  transform-origin: center;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Pulse ring (autour des CTAs accent) */
+.pulse-ring {
+  position: relative;
+}
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgb(244 180 0 / 0.5);
+  animation: pulse-ring 2.4s var(--ease-out-expo) infinite;
+  pointer-events: none;
+}
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0   rgb(244 180 0 / 0.5); }
+  70%  { box-shadow: 0 0 0 18px rgb(244 180 0 / 0); }
+  100% { box-shadow: 0 0 0 0   rgb(244 180 0 / 0); }
+}
+
+/* Hover-lift soft pour cards génériques */
+.hover-lift {
+  transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo);
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Reveal mask — utilisée par TextReveal (révélation par bandeau qui balaie) */
+@keyframes mask-sweep {
+  from { clip-path: inset(0 0 0 0); }
+  to   { clip-path: inset(0 100% 0 0); }
+}
+
+/* Number ticker — pour stats avec gradient accent */
+.editorial-num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  background: linear-gradient(180deg, var(--color-accent-300) 0%, var(--color-accent-500) 50%, var(--color-accent-700) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.editorial-num--light {
+  background: linear-gradient(180deg, var(--color-ocean-700) 0%, var(--color-ocean-900) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hairline divider doré */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-500), transparent);
+}
+.hairline-vertical {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--color-accent-500), transparent);
+}
+
+/* Card 3D tilt container (perspective wrapper) */
+.tilt-stage {
+  perspective: 1200px;
+  perspective-origin: center;
+}
+
+/* Scroll indicator (hero) */
+.scroll-cue {
+  width: 22px;
+  height: 36px;
+  border-radius: 11px;
+  border: 1px solid rgb(243 241 236 / 0.4);
+  position: relative;
+}
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--color-accent-400);
+  transform: translateX(-50%);
+  animation: scroll-cue 1.8s var(--ease-in-out-expo) infinite;
+}
+@keyframes scroll-cue {
+  0%   { opacity: 0; transform: translate(-50%, 0); }
+  50%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 14px); }
+}
+
+/* Background dot pattern (subtil) */
+.dot-pattern {
+  background-image: radial-gradient(rgb(6 26 46 / 0.10) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+.dot-pattern--light {
+  background-image: radial-gradient(rgb(243 241 236 / 0.18) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Image frame premium — pour photos hero/portraits */
+.frame-premium {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-cinema);
+}
+.frame-premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgb(243 241 236 / 0.15);
+  pointer-events: none;
+}
+
+/* ─── Scrollbar custom (marine + accent or) ──────────────────── */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(244 180 0 / 0.55) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(6 26 46 / 0.04);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-accent-400), var(--color-accent-700));
+  border-radius: 9999px;
+  border: 2px solid var(--color-paper);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-500);
+  border-color: var(--color-paper);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ─── Skeleton shimmer — placeholder de chargement image ────── */
+.skeleton-shimmer {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-bone);
+  background-image: linear-gradient(
+    100deg,
+    rgb(235 231 223 / 0) 30%,
+    rgb(243 241 236 / 0.7) 50%,
+    rgb(235 231 223 / 0) 70%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-sweep 1.6s linear infinite;
+}
+@keyframes skeleton-sweep {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}

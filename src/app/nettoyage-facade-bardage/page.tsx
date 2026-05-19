@@ -1,0 +1,28 @@
+import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
+import { getServiceBySlug } from "@/data/services";
+import { ServiceTemplate } from "@/components/public/service-template";
+import { Header } from "@/components/public/header";
+import { Footer } from "@/components/public/footer";
+import { StickyMobileCTA } from "@/components/public/sticky-mobile-cta";
+
+const SLUG = "nettoyage-facade-bardage";
+const service = getServiceBySlug(SLUG);
+
+export const metadata: Metadata = buildMetadata({
+  title: service.metaTitle,
+  description: service.metaDescription,
+  path: `/${SLUG}`,
+  imageUrl: service.heroImage,
+});
+
+export default function Page() {
+  return (
+    <>
+      <Header />
+      <ServiceTemplate slug={SLUG} />
+      <Footer />
+      <StickyMobileCTA />
+    </>
+  );
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "altidrone",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-05-05",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".open-next/assets"
+  },
+
+  "observability": {
+    "enabled": true
+  },
+
+  // Site vitrine pur — aucun binding D1/R2/KV nécessaire.
+  // Contenu éditable via src/lib/site-config.ts + src/data/*.ts.
+
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://altidroneservices.fr",
+    "SITE_ID": "altidrone",
+    "NEXT_PUBLIC_TURNSTILE_SITE_KEY": "1x00000000000000000000AA"
+  }
+
+  // Secrets (NE PAS METTRE EN CLAIR ICI — utiliser `wrangler secret put`)
+  // wrangler secret put RESEND_API_KEY
+  // wrangler secret put RESEND_FROM_EMAIL
+  // wrangler secret put CONTACT_RECIPIENT_EMAIL
+  // wrangler secret put TURNSTILE_SECRET_KEY
+}
