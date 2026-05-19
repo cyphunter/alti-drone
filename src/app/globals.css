@@ -317,20 +317,35 @@
 /* Gradient text utility
    Note : padding-inline-end pour éviter que le surplomb des glyphes italiques
    (Fraunces) soit clippé par la boîte inline — sinon le gradient ne peint
-   pas la pointe droite de la dernière lettre. */
+   pas la pointe droite de la dernière lettre.
+   On garde `display: inline` (pas inline-block) pour préserver le wrap
+   multi-ligne sur mobile : le padding s'applique en fin de dernière ligne. */
 .gradient-text {
   background: linear-gradient(120deg, var(--color-accent-300) 0%, var(--color-accent-500) 45%, var(--color-accent-700) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  padding-inline-end: 0.08em;
+  padding-inline-end: 0.12em;
+  margin-inline-end: -0.12em; /* compense le padding pour ne pas créer d'écart visible avec le texte suivant */
 }
 .gradient-text-ocean {
   background: linear-gradient(120deg, var(--color-ocean-500) 0%, var(--color-ocean-900) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  padding-inline-end: 0.08em;
+  padding-inline-end: 0.12em;
+  margin-inline-end: -0.12em;
+}
+
+/* Italique Fraunces : surplomb beaucoup plus important sur la lettre finale
+   (terminal courbé du "e", "a", "n", queue du "g"). Le padding-inline-end
+   standard ne suffit pas — on l'augmente nettement sur cette combinaison.
+   Le margin négatif équivalent neutralise l'impact en layout (pas de gap
+   avant la ponctuation qui suit, ex: "<span>en condition réelle</span>."). */
+.italic-display.gradient-text,
+.italic-display.gradient-text-ocean {
+  padding-inline-end: 0.3em;
+  margin-inline-end: -0.3em;
 }
 
 /* Shimmer : utilisé sur petits accents (badges, séparateurs) */
