@@ -44,7 +44,7 @@ export const siteConfig = {
   // ─── Réseaux sociaux ─────────────────────────────────────────────
   social: {
     instagram: "https://www.instagram.com/alti_drone_services_44/",
-    facebook: "",
+    facebook: "https://www.facebook.com/people/Alti-Drone-Services/61586023103933/",
     linkedin: "",
   },
 
@@ -103,20 +103,40 @@ export const siteConfig = {
   seo: {
     /** Mots-clés repris dans la balise <meta name="keywords"> du layout. */
     globalKeywords: [
-      "nettoyage toiture drone",
-      "démoussage drone Pornic",
-      "nettoyage façade drone",
-      "nettoyage panneaux solaires drone",
+      // Toiture — cœur d'activité
+      "démoussage toiture",
+      "nettoyage toiture",
+      "nettoyage toiture par drone",
+      "entretien toiture",
+      "traitement toiture",
+      "pulvérisation anti-mousse toiture",
+      "traitement hydrofuge toiture",
       "hydrofuge toiture",
       "anti-mousse toiture",
-      "télépilote DGAC",
-      "Pornic 44",
+      "inspection toiture par drone",
+      // Façades, bardages, panneaux solaires
+      "nettoyage façade",
+      "traitement façade",
+      "nettoyage bardage",
+      "nettoyage façade par drone",
+      "nettoyage bardage par drone",
+      "nettoyage panneaux solaires",
+      "nettoyage panneaux solaires par drone",
+      // Compétence / qualification
+      "télépilote drone DGAC",
+      // Zones — villes prioritaires
+      "nettoyage toiture Pornic",
+      "nettoyage toiture La Plaine-sur-Mer",
+      "nettoyage toiture Préfailles",
+      "nettoyage toiture Saint-Brévin-les-Pins",
+      "nettoyage toiture Saint-Michel-Chef-Chef",
+      "nettoyage toiture La Bernerie-en-Retz",
+      "nettoyage toiture Les Moutiers-en-Retz",
+      "nettoyage toiture Chaumes-en-Retz",
+      "démoussage toiture Pays de Retz",
       "Pays de Retz",
       "Loire-Atlantique",
-      "Saint-Brévin",
-      "La Plaine-sur-Mer",
-      "nettoyage bardage drone",
-      "inspection toiture drone",
+      "Côte de Jade",
     ] as readonly string[],
     /** Couleurs marque réutilisées dans les OG images / icônes générées dynamiquement. */
     brandColors: {

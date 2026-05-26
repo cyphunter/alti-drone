@@ -16,11 +16,14 @@ export const metadata: Metadata = buildMetadata({
   imageUrl: service.heroImage,
 });
 
-export default function Page() {
+type PageProps = { searchParams: Promise<{ img?: string }> };
+
+export default async function Page({ searchParams }: PageProps) {
+  const { img } = await searchParams;
   return (
     <>
       <Header />
-      <ServiceTemplate slug={SLUG} />
+      <ServiceTemplate slug={SLUG} heroImageOverride={img} />
       <Footer />
       <StickyMobileCTA />
     </>

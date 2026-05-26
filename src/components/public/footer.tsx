@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Instagram, Facebook, Linkedin, Phone, Mail, MapPin, Clock } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
@@ -18,25 +19,14 @@ export function Footer() {
         {/* Marque */}
         <div className="lg:col-span-4">
           <Link href="/" className="group inline-flex items-center gap-3" aria-label="Accueil">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent-500 text-ocean-900 transition-transform duration-500 ease-out group-hover:rotate-12">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-              >
-                <circle cx="6" cy="6" r="2.4" />
-                <circle cx="18" cy="6" r="2.4" />
-                <circle cx="6" cy="18" r="2.4" />
-                <circle cx="18" cy="18" r="2.4" />
-                <path d="M8 8l8 8M16 8l-8 8" />
-                <rect x="10" y="10" width="4" height="4" rx="0.5" />
-              </svg>
+            <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-paper p-1 transition-transform duration-500 ease-out group-hover:rotate-12">
+              <Image
+                src="/images/logo/logo-alti-droe-removebg-preview.png"
+                alt=""
+                width={112}
+                height={112}
+                className="h-full w-full object-contain"
+              />
             </span>
             <span className="font-display text-2xl text-paper transition-colors duration-300 group-hover:text-accent-300">
               {siteConfig.name}

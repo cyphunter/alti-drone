@@ -76,7 +76,7 @@ export default function GaleriePage() {
                 >
                   {g.service ? (
                     <Link
-                      href={`/${g.service}`}
+                      href={`/${g.service}?img=${encodeURIComponent(g.src)}`}
                       className="block h-full w-full"
                       aria-label={`${g.caption ?? g.alt} — voir la prestation`}
                     >

@@ -219,6 +219,25 @@
   to { transform: translateX(-50%); }
 }
 
+/* Marquee horizontal pour cartes d'avis (Bilik). Reprend la même keyframe
+   que la marquee de villes, mais avec un layout flex pour des cartes. */
+.avis-marquee__track {
+  width: max-content;
+  animation: marquee var(--avis-duration, 60s) linear infinite;
+  will-change: transform;
+}
+.avis-marquee:hover .avis-marquee__track,
+.avis-marquee:focus-within .avis-marquee__track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .avis-marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
+
 .tech-grid {
   background-image:
     linear-gradient(rgb(244 180 0 / 0.04) 1px, transparent 1px),

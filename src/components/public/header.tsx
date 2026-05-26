@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
@@ -137,7 +138,7 @@ export function Header() {
           >
             <DroneSignet />
             <span className="truncate font-display text-base font-medium tracking-tight text-ocean-900 transition-colors duration-300 group-hover:text-accent-700 sm:text-lg">
-              {siteConfig.shortName}
+              {siteConfig.name}
             </span>
           </Link>
 
@@ -241,7 +242,7 @@ export function Header() {
             >
               <DroneSignet />
               <span className="font-display text-lg font-medium tracking-tight text-ocean-900">
-                {siteConfig.shortName}
+                {siteConfig.name}
               </span>
             </Link>
             <button
@@ -497,26 +498,15 @@ function ServicesDropdown({
 
 function DroneSignet() {
   return (
-    <span className="relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ocean-900 text-accent-500 transition-all duration-500 ease-out group-hover:rotate-[18deg] group-hover:bg-ocean-800 group-hover:shadow-accent-glow">
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden
-        className="transition-transform duration-700 group-hover:rotate-[-18deg]"
-      >
-        <circle cx="6" cy="6" r="2.4" />
-        <circle cx="18" cy="6" r="2.4" />
-        <circle cx="6" cy="18" r="2.4" />
-        <circle cx="18" cy="18" r="2.4" />
-        <path d="M8 8l8 8M16 8l-8 8" />
-        <rect x="10" y="10" width="4" height="4" rx="0.5" />
-      </svg>
+    <span className="relative inline-flex h-11 w-11 shrink-0 items-center justify-center transition-transform duration-500 ease-out group-hover:rotate-[8deg] sm:h-12 sm:w-12">
+      <Image
+        src="/images/logo/logo-alti-droe-removebg-preview.png"
+        alt=""
+        width={96}
+        height={96}
+        priority
+        className="h-full w-full object-contain"
+      />
     </span>
   );
 }

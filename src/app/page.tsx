@@ -9,6 +9,8 @@ import { services, certificationsBlock } from "@/data/services";
 import { faq } from "@/data/faq";
 import { galerie, heroVideo } from "@/data/galerie";
 import { temoignages } from "@/data/temoignages";
+import { googleData } from "@/data/google-reviews";
+import { getBilikReviews, bilikToTemoignage } from "@/lib/bilik-reviews";
 
 import { Header } from "@/components/public/header";
 import { Footer } from "@/components/public/footer";
@@ -19,7 +21,7 @@ import { StatsEditorial } from "@/components/public/stats-editorial";
 import { ProcessSteps } from "@/components/public/process-steps";
 import { BentoGallery } from "@/components/public/bento-gallery";
 import { ZonesMarquee } from "@/components/public/zones-marquee";
-import { Testimonials } from "@/components/public/testimonials";
+import { AvisSection, type AvisSource } from "@/components/public/avis-section";
 import { FaqAccordion } from "@/components/public/faq-accordion";
 import { YouTubeEmbed } from "@/components/public/youtube-embed";
 import { CtaBandeau } from "@/components/public/cta-bandeau";
@@ -28,10 +30,9 @@ import { StickyMobileCTA } from "@/components/public/sticky-mobile-cta";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import { StaggerReveal, StaggerItem } from "@/components/motion/stagger-reveal";
 import { FadeUp } from "@/components/motion/text-reveal";
-import { DroneGlyph } from "@/components/motion/drone-glyph";
 
 import { JsonLd } from "@/components/seo/json-ld";
-import type { FAQPage, HowTo, VideoObject, WithContext } from "schema-dts";
+import type { FAQPage, HowTo, VideoObject, WithContext, RoofingContractor } from "schema-dts";
 
 export const metadata: Metadata = buildMetadata({
   title: `${siteConfig.name} — Nettoyage toiture par drone à Pornic (44)`,
@@ -39,7 +40,73 @@ export const metadata: Metadata = buildMetadata({
   path: "/",
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  const bilik = await getBilikReviews();
+  const bilikItems = bilik.reviews.map(bilikToTemoignage);
+  const bilikDisplayItems = bilikItems.length > 0 ? bilikItems : temoignages;
+
+  const avisSources: readonly [AvisSource, AvisSource] = [
+    {
+      key: "bilik",
+      label: "Bilik",
+      reviews: bilikDisplayItems,
+      aggregateRating: bilik.aggregateRating,
+      reviewCount: bilik.reviewCount,
+      sourceUrl: bilik.sourceUrl,
+      intro:
+        bilik.reviews.length > 0
+          ? "Avis vérifiés et collectés par Bilik, plateforme indépendante d'évaluation des artisans."
+          : "Les premiers retours arrivent — n'hésitez pas à nous laisser un avis après votre prestation.",
+    },
+    {
+      key: "google",
+      label: "Google",
+      reviews: googleData.reviews,
+      aggregateRating: googleData.aggregateRating,
+      reviewCount: googleData.reviewCount,
+      sourceUrl: googleData.sourceUrl,
+      intro:
+        googleData.reviews.length > 0
+          ? "Avis publiés directement par nos clients sur leur fiche Google."
+          : "Retrouvez bientôt nos avis Google ici — vous pouvez nous laisser le vôtre depuis votre fiche Google.",
+    },
+  ];
+
+  const reviewsSchema: WithContext<RoofingContractor> | null =
+    bilik.reviews.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "RoofingContractor",
+          "@id": `${siteConfig.url}#business`,
+          name: siteConfig.legalName,
+          url: siteConfig.url,
+          ...(bilik.aggregateRating && bilik.reviewCount
+            ? {
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: String(bilik.aggregateRating),
+                  reviewCount: bilik.reviewCount,
+                  bestRating: 5,
+                  worstRating: 1,
+                },
+              }
+            : {}),
+          review: bilik.reviews.map((r) => ({
+            "@type": "Review",
+            author: { "@type": "Person", name: r.author },
+            datePublished: r.date,
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: r.rating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+            ...(r.about ? { about: { "@type": "Thing", name: r.about } } : {}),
+            reviewBody: r.text,
+          })),
+        }
+      : null;
+
   const faqSchema: WithContext<FAQPage> = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -111,6 +178,7 @@ export default function HomePage() {
       <JsonLd schema={faqSchema} />
       <JsonLd schema={howToSchema} />
       <JsonLd schema={videoSchema} />
+      {reviewsSchema ? <JsonLd schema={reviewsSchema} /> : null}
       <Header />
       <main id="main-content">
         {/* ───────────────────────────── HERO CINEMATIC */}
@@ -255,12 +323,6 @@ export default function HomePage() {
         {/* ───────────────────────────── ABOUT — Allan (ocean dark) */}
         <section className="section-ocean grain relative overflow-hidden py-24 lg:py-32">
           <div className="tech-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-32 top-1/2 -translate-y-1/2"
-          >
-            <DroneGlyph size={420} tone="light" className="opacity-10" />
-          </div>
 
           <div className="container-soft relative grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-20">
             <ScrollReveal className="lg:col-span-5">
@@ -382,24 +444,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ───────────────────────────── TÉMOIGNAGES */}
+        {/* ───────────────────────────── AVIS CLIENTS (Bilik / Google) */}
         <section className="relative bg-paper py-24 lg:py-32">
-          <div className="container-soft grid gap-12 lg:grid-cols-12 lg:items-center">
-            <ScrollReveal className="lg:col-span-5">
-              <SectionHeading
-                eyebrow="Témoignages"
-                title="Ce que disent nos clients."
-                intro="Les premiers retours arrivent — n'hésitez pas à nous laisser un avis après votre prestation."
-              />
-              <div
-                aria-hidden
-                className="hairline mt-8 max-w-[10rem]"
-              />
-            </ScrollReveal>
-            <ScrollReveal delay={0.05} className="lg:col-span-7">
-              <Testimonials items={temoignages} tone="dark" />
-            </ScrollReveal>
-          </div>
+          <ScrollReveal>
+            <AvisSection sources={avisSources} defaultKey="bilik" />
+          </ScrollReveal>
         </section>
 
         {/* ───────────────────────────── FAQ */}

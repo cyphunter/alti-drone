@@ -83,7 +83,7 @@ export const metadata: Metadata = {
       }
     : {}),
   // Icons + manifest auto-générés par les conventions Next.js App Router :
-  // - src/app/icon.svg + icon.tsx + apple-icon.tsx (favicons)
+  // - src/app/icon.jpg + apple-icon.jpg (favicons statiques — logo sur fond gris)
   // - src/app/manifest.ts (manifest PWA)
   // - src/app/opengraph-image.tsx + twitter-image.tsx (images partagées)
 };
@@ -114,8 +114,8 @@ const localBusinessSchema: WithContext<RoofingContractor> = {
   image: `${siteConfig.url}/opengraph-image`,
   logo: {
     "@type": "ImageObject",
-    url: `${siteConfig.url}/icon.svg`,
-    contentUrl: `${siteConfig.url}/icon.svg`,
+    url: `${siteConfig.url}/images/logo/logo-alti-droe-removebg-preview.png`,
+    contentUrl: `${siteConfig.url}/images/logo/logo-alti-droe-removebg-preview.png`,
   },
   priceRange: "€€",
   currenciesAccepted: "EUR",

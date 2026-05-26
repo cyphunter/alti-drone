@@ -3,7 +3,6 @@ import { ArrowRight, Phone, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
 import { Magnetic } from "@/components/motion/magnetic";
-import { DroneGlyph } from "@/components/motion/drone-glyph";
 import { FadeUp } from "@/components/motion/text-reveal";
 
 type CtaBandeauProps = {
@@ -32,14 +31,6 @@ export function CtaBandeau({
             "radial-gradient(ellipse 70% 50% at 20% 30%, rgb(244 180 0 / 0.18), transparent 60%), radial-gradient(ellipse 60% 50% at 80% 70%, rgb(25 82 126 / 0.45), transparent 60%)",
         }}
       />
-
-      {/* Drone glyph décoratif */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-12 top-1/2 hidden -translate-y-1/2 lg:block"
-      >
-        <DroneGlyph size={320} tone="light" className="opacity-15" />
-      </div>
 
       <div className="container-soft relative">
         <div className="flex flex-col items-start gap-10 lg:flex-row lg:items-center lg:justify-between">

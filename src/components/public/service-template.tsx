@@ -22,10 +22,17 @@ import type {
 
 type ServiceTemplateProps = {
   slug: string;
+  /**
+   * Image hero à afficher en priorité (override de `service.heroImage`).
+   * Utilisée quand l'utilisateur arrive depuis la galerie pour conserver
+   * la même image que celle de la card cliquée.
+   */
+  heroImageOverride?: string;
 };
 
-export function ServiceTemplate({ slug }: ServiceTemplateProps) {
+export function ServiceTemplate({ slug, heroImageOverride }: ServiceTemplateProps) {
   const service = getServiceBySlug(slug);
+  const heroImage = heroImageOverride ?? service.heroImage;
   const Icon = service.icon;
   const CertIcon = certificationsBlock.icon;
   const url = canonicalUrl(`/${service.slug}`);
@@ -147,11 +154,11 @@ export function ServiceTemplate({ slug }: ServiceTemplateProps) {
                 </p>
               ) : null}
             </div>
-            {service.heroImage ? (
+            {heroImage ? (
               <div className="lg:col-span-5">
                 <div className="relative overflow-hidden rounded-2xl shadow-elevated ring-1 ring-ocean-900/10">
                   <SmartImage
-                    src={service.heroImage}
+                    src={heroImage}
                     alt={service.title}
                     width={960}
                     height={1200}

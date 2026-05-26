@@ -267,6 +267,152 @@ export const localPages: readonly LocalPage[] = [
       },
     ],
   },
+
+  // ─── Saint-Brévin-les-Pins ────────────────────────────────────
+  {
+    slug: "saint-brevin-les-pins",
+    city: "Saint-Brévin-les-Pins",
+    postalCode: "44250",
+    distanceKm: 14,
+    geo: { latitude: 47.2453, longitude: -2.1683 },
+    h1: "Nettoyage par drone à Saint-Brévin-les-Pins",
+    eyebrow: "Saint-Brévin-les-Pins · 44250 · Loire-Atlantique",
+    metaTitle: "Nettoyage toiture drone à Saint-Brévin-les-Pins (44250)",
+    metaDescription:
+      "Démoussage de toiture, nettoyage de façade et panneaux solaires par drone à Saint-Brévin-les-Pins. Sans échafaudage, devis gratuit en 48 h.",
+    primaryKeyword: "nettoyage toiture drone Saint-Brévin-les-Pins",
+    intro:
+      "À Saint-Brévin-les-Pins, station balnéaire de l'estuaire de la Loire, nous intervenons sur toitures, façades, bardages et panneaux solaires par drone professionnel. Une méthode rapide, sécurisée et sans échafaudage, adaptée aussi bien aux pavillons sous pinède qu'aux villas balnéaires en front de mer.",
+    contextLocal:
+      "Étirée sur près de huit kilomètres entre l'embouchure de la Loire et la côte atlantique, Saint-Brévin-les-Pins combine plages, pinède classée et patrimoine balnéaire varié — villas Belle Époque, maisons des années 30, pavillonnaire dense, copropriétés modernes. L'exposition est double : embruns marins en façade ouest, air iodé d'estuaire au nord. Les toitures brévinoises souffrent rapidement — mousses persistantes sur les pans nord, noircissures sur les tuiles, résine et débris végétaux sous les pins maritimes qui retiennent l'humidité. Notre drone professionnel est particulièrement adapté ici : il atteint sans difficulté les toitures partiellement masquées par la pinède, intervient sans piétiner les couvertures fragilisées par l'humidité et permet de traiter rapidement les copropriétés balnéaires avant la haute saison touristique.",
+    particularites: [
+      "Double exposition océan + estuaire — encrassement accéléré",
+      "Pavillonnaire sous pinède : résine + lichens persistants",
+      "Patrimoine balnéaire (villas anciennes) à préserver sans piétinement",
+      "Forte demande syndic copropriétés avant la saison estivale",
+    ],
+    nearbyZones: [
+      "Saint-Michel-Chef-Chef",
+      "La Plaine-sur-Mer",
+      "Tharon-Plage",
+      "Saint-Père-en-Retz",
+      "Saint-Nazaire",
+    ],
+    faq: [
+      {
+        question: "Intervenez-vous sur le front de mer brévinois ?",
+        answer:
+          "Oui — c'est précisément l'une de nos zones d'intervention privilégiées. L'exposition au vent et aux embruns y accélère l'encrassement, et le drone permet d'intervenir sans monter d'échafaudage face à la mer.",
+      },
+      {
+        question: "Comment gérer la résine de pin sur les toitures brévinoises ?",
+        answer:
+          "La pinède maritime laisse beaucoup de résine et de débris qui retiennent mousses et lichens. Notre traitement combine un démoussage pénétrant et, si besoin, un hydrofuge pour limiter l'accumulation entre deux interventions.",
+      },
+      {
+        question: "Pouvez-vous traiter une copropriété en bord de plage ?",
+        answer:
+          "Oui — copropriétés et résidences de tourisme représentent une part importante de notre activité à Saint-Brévin. Devis sur dossier syndic, rapport photo HD remis pour archivage, planning hors haute saison.",
+      },
+    ],
+  },
+
+  // ─── Les Moutiers-en-Retz ─────────────────────────────────────
+  {
+    slug: "les-moutiers-en-retz",
+    city: "Les Moutiers-en-Retz",
+    postalCode: "44760",
+    distanceKm: 14,
+    geo: { latitude: 47.0511, longitude: -2.0103 },
+    h1: "Nettoyage par drone aux Moutiers-en-Retz",
+    eyebrow: "Les Moutiers-en-Retz · 44760 · Loire-Atlantique",
+    metaTitle: "Nettoyage toiture drone aux Moutiers-en-Retz (44760)",
+    metaDescription:
+      "Démoussage de toiture, façade et panneaux solaires par drone aux Moutiers-en-Retz. Spécialiste bâti ancien et exposition marais. Devis gratuit.",
+    primaryKeyword: "nettoyage toiture drone Les Moutiers-en-Retz",
+    intro:
+      "Aux Moutiers-en-Retz, village historique entre baie de Bourgneuf et marais, nous traitons les toitures, façades, bardages et panneaux solaires par drone professionnel. Méthode rapide et sécurisée, idéale pour le bâti ancien comme pour les lotissements pavillonnaires récents.",
+    contextLocal:
+      "Plus vieille commune littorale du Pays de Retz, Les Moutiers-en-Retz juxtapose un centre-bourg médiéval (église, anciennes maisons de pêcheurs en pierre et ardoise), un port traditionnel, des plages familiales et des lotissements pavillonnaires en couronne. La proximité immédiate de la baie de Bourgneuf et des marais salants crée un environnement très humide : brouillards matinaux fréquents, taux d'hygrométrie élevé, exposition aux vents salés. Résultat : les toitures se couvrent rapidement de mousses et de lichens, particulièrement sur les pans nord et autour des éléments de zinguerie. Le drone est ici une solution premium : il accède sans difficulté aux toitures du centre ancien (ruelles étroites, accès limités) et traite efficacement les grandes couvertures pavillonnaires des lotissements récents, sans contact mécanique, sans piétinement.",
+    particularites: [
+      "Patrimoine ancien centre-bourg : pierre, ardoise, accès difficiles",
+      "Lotissements pavillonnaires récents en périphérie",
+      "Hygrométrie élevée (marais Bourgneuf) — encrassement rapide",
+      "Forte saisonnalité touristique : intervention recommandée hors été",
+    ],
+    nearbyZones: [
+      "La Bernerie-en-Retz",
+      "Bourgneuf-en-Retz",
+      "Pornic",
+      "Chaumes-en-Retz",
+    ],
+    faq: [
+      {
+        question: "Pouvez-vous nettoyer une maison ancienne du centre des Moutiers ?",
+        answer:
+          "Oui — le centre ancien est précisément un cas où le drone fait la différence : ruelles étroites, accès véhicule limité, toitures parfois fragilisées. Aucun échafaudage, aucun piétinement sur les ardoises anciennes ou tuiles d'origine.",
+      },
+      {
+        question: "À quelle fréquence nettoyer ma toiture aux Moutiers ?",
+        answer:
+          "L'humidité de la baie de Bourgneuf accélère l'encrassement : un démoussage tous les 3 ans est recommandé en zone bourg, plus rapproché en pan nord ou sous végétation. Un hydrofuge complémentaire allonge l'intervalle.",
+      },
+      {
+        question: "Intervenez-vous hors saison ?",
+        answer:
+          "Oui — nous privilégions les interventions hors période touristique (printemps et automne) pour limiter les nuisances dans les zones résidentielles et plages. Devis et planification adaptés au calendrier local.",
+      },
+    ],
+  },
+
+  // ─── Chaumes-en-Retz ──────────────────────────────────────────
+  {
+    slug: "chaumes-en-retz",
+    city: "Chaumes-en-Retz",
+    postalCode: "44320",
+    distanceKm: 16,
+    geo: { latitude: 47.1325, longitude: -2.0247 },
+    h1: "Nettoyage par drone à Chaumes-en-Retz",
+    eyebrow: "Chaumes-en-Retz · 44320 · Loire-Atlantique",
+    metaTitle: "Nettoyage toiture drone à Chaumes-en-Retz (44320)",
+    metaDescription:
+      "Démoussage de toiture, façade, bardage et panneaux solaires par drone à Chaumes-en-Retz (Arthon, Chéméré). Spécialiste bâti rural. Devis gratuit.",
+    primaryKeyword: "nettoyage toiture drone Chaumes-en-Retz",
+    intro:
+      "À Chaumes-en-Retz, commune née de la fusion d'Arthon-en-Retz et Chéméré, nous intervenons sur les toitures, façades, bardages et bâtiments agricoles par drone professionnel. Une solution rapide et sans échafaudage, particulièrement adaptée au bâti rural et aux grandes surfaces.",
+    contextLocal:
+      "Au cœur de la campagne du Pays de Retz, Chaumes-en-Retz regroupe les anciens bourgs d'Arthon-en-Retz et de Chéméré ainsi qu'un vaste territoire rural ponctué d'exploitations agricoles, de hangars et de granges. Le bâti est typique du rétais intérieur : maisons en pierre et tuiles, ardoises et fibro-ciment sur les annexes, lotissements pavillonnaires récents autour des bourgs, et nombreux bâtiments d'exploitation (hangars bardés, granges en fibro-ciment, étables). L'humidité ambiante des terres basses, les pans masqués par la végétation et la dispersion du bâti rendent les interventions traditionnelles en échafaudage ou nacelle coûteuses et lentes. Notre drone professionnel est particulièrement pertinent ici : déploiement rapide d'un site à l'autre, accès aux hangars isolés, traitement homogène des grandes surfaces de bardage métallique et nettoyage en toute sécurité des fibro-ciment anciens sans aucune abrasion mécanique.",
+    particularites: [
+      "Commune rurale : nombreux hangars agricoles et bardages métalliques",
+      "Forte présence de fibro-ciment ancien sur granges et annexes",
+      "Bâti dispersé sur 2 bourgs (Arthon + Chéméré) : drone = gain de temps",
+      "Pavillonnaire récent en couronne des bourgs",
+    ],
+    nearbyZones: [
+      "Pornic",
+      "Saint-Père-en-Retz",
+      "Les Moutiers-en-Retz",
+      "Sainte-Pazanne",
+      "Chauvé",
+    ],
+    faq: [
+      {
+        question: "Intervenez-vous sur les hangars agricoles à Chaumes ?",
+        answer:
+          "Oui — les bâtiments agricoles (hangars bardés, granges, étables) sont une part importante de notre activité dans le secteur. Le drone permet de traiter rapidement de grandes surfaces de bardage métallique ou fibro-ciment sans nacelle ni arrêt d'exploitation.",
+      },
+      {
+        question: "Le fibro-ciment des vieilles granges peut-il être nettoyé ?",
+        answer:
+          "Oui — et c'est même le scénario idéal pour le drone. Aucune abrasion mécanique, aucun risque d'émission de fibres si le matériau pose 1997 contient de l'amiante. Pulvérisation, séchage et rinçage à distance.",
+      },
+      {
+        question: "Pouvez-vous traiter plusieurs bâtiments d'une même exploitation ?",
+        answer:
+          "Oui — nous chiffrons fréquemment des lots multi-bâtiments (maison + hangar + grange) avec déploiement sur une même journée. Devis groupé plus avantageux qu'une intervention unique.",
+      },
+    ],
+  },
 ] as const;
 
 export const localPageSlugs = localPages.map((lp) => lp.slug);
