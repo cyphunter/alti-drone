@@ -7,16 +7,13 @@ import { Phone, ArrowRight, ShieldCheck, MapPin } from "lucide-react";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site-config";
-import { galerie } from "@/data/galerie";
 import { TextReveal, FadeUp } from "@/components/motion/text-reveal";
 import { WordRotate } from "@/components/motion/word-rotate";
 import { Magnetic } from "@/components/motion/magnetic";
 
-const HERO_IMAGE = galerie.find((g) => g.id === "hero-action") ?? galerie[0];
-const SECONDARY_IMAGE =
-  galerie.find((g) => g.id === "drone-vol") ??
-  galerie.find((g) => g.id === "toit-demoussage-2") ??
-  galerie[1];
+// Visuels héros (décoratifs — alt vide). Drone en intervention sur toiture tuiles.
+const HERO_IMAGE_SRC = "/images/hero/accueil.avif";
+const SECONDARY_IMAGE_SRC = "/images/galerie/30-full.webp";
 
 const ROTATING_TARGETS = [
   "toitures",
@@ -51,7 +48,7 @@ export function HeroHome() {
         className="pointer-events-none absolute inset-0 -z-10"
       >
         <Image
-          src={HERO_IMAGE.src}
+          src={HERO_IMAGE_SRC}
           alt=""
           fill
           priority
@@ -182,7 +179,7 @@ export function HeroHome() {
               className="pointer-events-none absolute -bottom-6 -right-6 hidden h-28 w-28 overflow-hidden rounded-2xl ring-1 ring-paper/15 sm:block"
             >
               <Image
-                src={SECONDARY_IMAGE.src}
+                src={SECONDARY_IMAGE_SRC}
                 alt=""
                 fill
                 sizes="120px"

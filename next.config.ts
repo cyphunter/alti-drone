@@ -10,7 +10,7 @@ const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline' ${isProd ? "" : "'unsafe-eval'"} https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com`.trim(),
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://i.ytimg.com https://assets.zyrosite.com",
+  "img-src 'self' data: blob: https://i.ytimg.com",
   "font-src 'self' data:",
   "connect-src 'self' https://challenges.cloudflare.com",
   "frame-src 'self' https://challenges.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com",
@@ -38,7 +38,6 @@ const nextConfig: NextConfig = {
     loader: "custom",
     loaderFile: "./src/lib/image-loader.ts",
     remotePatterns: [
-      { protocol: "https", hostname: "assets.zyrosite.com", pathname: "/**" },
       { protocol: "https", hostname: "i.ytimg.com", pathname: "/**" },
     ],
   },

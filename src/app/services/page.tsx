@@ -9,6 +9,7 @@ import { Footer } from "@/components/public/footer";
 import { StickyMobileCTA } from "@/components/public/sticky-mobile-cta";
 import { SectionHeading } from "@/components/public/section-heading";
 import { ServiceCard } from "@/components/public/service-card";
+import { ServiceCarousel } from "@/components/public/service-carousel";
 import { CtaBandeau } from "@/components/public/cta-bandeau";
 import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import { StaggerReveal, StaggerItem } from "@/components/motion/stagger-reveal";
@@ -95,13 +96,28 @@ export default function ServicesPage() {
                     intro={groupIntro(g.group)}
                   />
                 </ScrollReveal>
-                <StaggerReveal className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {groupServices.map((s) => (
-                    <StaggerItem key={s.slug}>
-                      <ServiceCard service={s} />
-                    </StaggerItem>
-                  ))}
-                </StaggerReveal>
+                {groupServices.length > 3 ? (
+                  <ScrollReveal className="mt-12">
+                    <ServiceCarousel>
+                      {groupServices.map((s) => (
+                        <li
+                          key={s.slug}
+                          className="shrink-0 basis-[85%] snap-start sm:basis-[47%] lg:basis-[32%]"
+                        >
+                          <ServiceCard service={s} />
+                        </li>
+                      ))}
+                    </ServiceCarousel>
+                  </ScrollReveal>
+                ) : (
+                  <StaggerReveal className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {groupServices.map((s) => (
+                      <StaggerItem key={s.slug}>
+                        <ServiceCard service={s} />
+                      </StaggerItem>
+                    ))}
+                  </StaggerReveal>
+                )}
               </div>
             </section>
           );

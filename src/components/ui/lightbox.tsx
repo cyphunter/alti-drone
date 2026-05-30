@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { SmartImage } from "@/components/ui/smart-image";
@@ -11,6 +12,8 @@ export type LightboxItem = {
   src: string;
   alt: string;
   caption?: string;
+  /** Slug de la prestation liée — affiche un lien « Voir la prestation ». */
+  service?: string;
   width: number;
   height: number;
 };
@@ -150,18 +153,31 @@ export function Lightbox({ items, index, onClose, onChange }: LightboxProps) {
                 className="h-auto max-h-[80vh] w-auto max-w-[92vw] rounded-xl object-contain"
               />
             </div>
-            {current.caption ? (
-              <figcaption className="mt-4 max-w-2xl px-4 text-center font-display text-sm leading-snug text-paper/90 sm:text-base">
-                {current.caption}
-                {total > 1 ? (
-                  <span className="ml-2 text-xs tracking-[0.18em] text-paper/50">
+            {current.caption || current.service || total > 1 ? (
+              <figcaption className="mt-4 flex max-w-2xl flex-col items-center gap-2 px-4 text-center">
+                {current.caption ? (
+                  <span className="font-display text-sm leading-snug text-paper/90 sm:text-base">
+                    {current.caption}
+                    {total > 1 ? (
+                      <span className="ml-2 text-xs tracking-[0.18em] text-paper/50">
+                        {(index ?? 0) + 1} / {total}
+                      </span>
+                    ) : null}
+                  </span>
+                ) : total > 1 ? (
+                  <span className="text-xs tracking-[0.18em] text-paper/50">
                     {(index ?? 0) + 1} / {total}
                   </span>
                 ) : null}
-              </figcaption>
-            ) : total > 1 ? (
-              <figcaption className="mt-4 text-xs tracking-[0.18em] text-paper/50">
-                {(index ?? 0) + 1} / {total}
+                {current.service ? (
+                  <Link
+                    href={`/${current.service}`}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-paper/10 px-3 py-1 text-xs font-medium text-accent-300 ring-1 ring-paper/20 backdrop-blur transition hover:bg-accent-500 hover:text-ocean-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400"
+                  >
+                    Voir la prestation
+                    <ArrowRight size={13} aria-hidden />
+                  </Link>
+                ) : null}
               </figcaption>
             ) : null}
           </motion.figure>

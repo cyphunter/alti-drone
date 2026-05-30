@@ -585,6 +585,15 @@
   pointer-events: none;
 }
 
+/* ─── Masque scrollbar (carrousels draggables) ───────────────── */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge legacy */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome / Safari / Edge */
+}
+
 /* ─── Scrollbar custom (marine + accent or) ──────────────────── */
 html {
   scrollbar-width: thin;

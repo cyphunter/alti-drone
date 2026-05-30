@@ -52,3 +52,6 @@ next-env.d.ts
 # local db (better-sqlite3)
 local.db
 local.db-journal
+
+# photos sources client (originaux non optimisés — hors build, ne pas committer)
+/_photos-sources-client/

@@ -7,7 +7,7 @@ import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 import { services, certificationsBlock } from "@/data/services";
 import { faq } from "@/data/faq";
-import { galerie, heroVideo } from "@/data/galerie";
+import { galerieFeatured, heroVideo } from "@/data/galerie";
 import { temoignages } from "@/data/temoignages";
 import { googleData } from "@/data/google-reviews";
 import { getBilikReviews, bilikToTemoignage } from "@/lib/bilik-reviews";
@@ -169,9 +169,7 @@ export default async function HomePage() {
     publisher: { "@id": `${siteConfig.url}#business` },
   };
 
-  const galeriePreview = galerie.slice(0, 6);
-  const portrait =
-    galerie.find((g) => g.id === "hero-action") ?? galerie[0];
+  const galeriePreview = galerieFeatured;
 
   return (
     <>
@@ -328,11 +326,11 @@ export default async function HomePage() {
             <ScrollReveal className="lg:col-span-5">
               <div className="frame-premium relative aspect-[4/5] overflow-hidden">
                 <SmartImage
-                  src={portrait.src}
-                  alt={`${siteConfig.legal.publisher}, fondateur et pilote`}
+                  src="/images/hero/accueil.avif"
+                  alt="Allan Bouguendoura, fondateur d'Alti' Drone & Services et pilote de drone certifié, devant son véhicule d'intervention"
                   fill
                   sizes="(min-width: 1024px) 40vw, 90vw"
-                  className="object-cover"
+                  className="object-cover object-[30%_50%]"
                 />
                 {/* Badge flottant : signature */}
                 <div className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-paper/90 px-4 py-1.5 text-xs font-medium text-ocean-900 ring-1 ring-paper/40 backdrop-blur-md">

@@ -19,11 +19,10 @@ export const stats: readonly Stat[] = [
     description: "Inspection toiture par drone incluse",
   },
   {
-    to: 0,
-    suffix: "",
-    prefix: "",
-    label: "Échafaudage à monter",
-    description: "Aucun matériel lourd, aucun risque en hauteur",
+    to: 30,
+    prefix: "+",
+    label: "Interventions réalisées",
+    description: "Toitures, façades et panneaux solaires dans le Pays de Retz",
   },
   {
     to: 48,

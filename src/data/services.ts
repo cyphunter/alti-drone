@@ -60,8 +60,6 @@ export type Service = {
   faq: readonly ServiceFaq[];
 };
 
-const ZYROSITE = "https://assets.zyrosite.com/cdn-cgi/image/format=auto,fit=cover";
-
 export const services: readonly Service[] = [
   // ─── 1. Traitement de toiture ────────────────────────────────
   {
@@ -118,7 +116,7 @@ export const services: readonly Service[] = [
       "Shingle",
     ],
     duree: "1/2 à 1 journée selon surface",
-    heroImage: `${ZYROSITE},w=1920/mp84wMEb64sEBBPm/capture-d-a-c-cran-2026-03-05-222401-GrxtPltUu42uJVQB.png`,
+    heroImage: "/images/services/traitement-de-toiture.webp",
     relatedSlugs: ["tuiles", "ardoises-naturelles", "ardoises-fibro-ciment", "nettoyage-des-panneaux-solaires"],
     faq: [
       {
@@ -180,7 +178,7 @@ export const services: readonly Service[] = [
       "Tuiles béton (Stelvio, Sigma)",
     ],
     duree: "1/2 journée à 1 journée",
-    heroImage: `${ZYROSITE},w=1920/mp84wMEb64sEBBPm/capture-daa-c-cran-2026-01-28-174341-z34EuHSC98sSnwU3.png`,
+    heroImage: "/images/services/tuiles.webp",
     relatedSlugs: ["traitement-de-toiture", "ardoises-naturelles", "ardoises-fibro-ciment"],
     faq: [
       {
@@ -232,6 +230,7 @@ export const services: readonly Service[] = [
     ],
     supports: ["Ardoises naturelles d'Espagne", "Ardoises d'Angers", "Ardoises Eclypse / Cupa"],
     duree: "1/2 journée à 1 journée",
+    heroImage: "/images/services/ardoises-naturelles.webp",
     relatedSlugs: ["ardoises-fibro-ciment", "traitement-de-toiture", "tuiles"],
     faq: [
       {
@@ -283,6 +282,7 @@ export const services: readonly Service[] = [
     ],
     supports: ["Ardoises Eternit fibro-ciment", "Plaques ondulées fibro-ciment"],
     duree: "1/2 journée à 1 journée",
+    heroImage: "/images/services/ardoises-fibro-ciment.webp",
     relatedSlugs: ["ardoises-naturelles", "traitement-de-toiture", "tuiles"],
     faq: [
       {
@@ -340,7 +340,7 @@ export const services: readonly Service[] = [
       "Pierre naturelle",
     ],
     duree: "1 à 2 jours selon surface",
-    heroImage: `${ZYROSITE},w=1920/mp84wMEb64sEBBPm/capture-daa-c-cran-2026-01-28-175110-MWdwgwDYc4yvHDlc.png`,
+    heroImage: "/images/services/nettoyage-facade-bardage.webp",
     relatedSlugs: [
       "nettoyage-de-facade-en-enduit",
       "nettoyage-bardage-metallique",
@@ -397,6 +397,7 @@ export const services: readonly Service[] = [
     ],
     supports: ["Enduit monocouche", "Enduit gratté", "Enduit taloché", "Enduit projeté"],
     duree: "1 à 2 jours",
+    heroImage: "/images/services/nettoyage-de-facade-en-enduit.webp",
     relatedSlugs: ["nettoyage-facade-bardage", "nettoyage-bardage-pvc", "nettoyage-bardage-metallique"],
     faq: [
       {
@@ -453,6 +454,7 @@ export const services: readonly Service[] = [
       "Bac acier toiture-bardage",
     ],
     duree: "1 à 3 jours selon surface",
+    heroImage: "/images/services/nettoyage-bardage-metallique.webp",
     relatedSlugs: ["nettoyage-bardage-pvc", "nettoyage-facade-bardage", "nettoyage-des-panneaux-solaires"],
     faq: [
       {
@@ -504,6 +506,7 @@ export const services: readonly Service[] = [
     ],
     supports: ["Bardage PVC", "Bardage composite (Trespa, Werzalit)", "Sous-toiture PVC"],
     duree: "1/2 journée à 1 journée",
+    heroImage: "/images/services/nettoyage-bardage-pvc.webp",
     relatedSlugs: ["nettoyage-bardage-metallique", "nettoyage-de-facade-en-enduit", "nettoyage-facade-bardage"],
     faq: [
       {
@@ -556,7 +559,7 @@ export const services: readonly Service[] = [
     ],
     supports: ["Panneaux photovoltaïques résidentiels", "Centrales au sol", "Toitures industrielles", "Ombrières solaires"],
     duree: "1/2 journée à 1 journée",
-    heroImage: `${ZYROSITE},w=1920/mp84wMEb64sEBBPm/capture-daa-c-cran-2026-05-02-151541-j1l8OuJa2bZ50D7T.png`,
+    heroImage: "/images/services/nettoyage-des-panneaux-solaires.webp",
     relatedSlugs: ["nettoyage-bardage-metallique", "traitement-de-toiture", "nettoyage-facade-bardage"],
     faq: [
       {

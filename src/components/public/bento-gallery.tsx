@@ -2,11 +2,11 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Maximize2 } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { GalleryItem } from "@/data/galerie";
 import { cn } from "@/lib/utils";
 import { SmartImage } from "@/components/ui/smart-image";
-import { Lightbox } from "@/components/ui/lightbox";
+import { Lightbox, type LightboxItem } from "@/components/ui/lightbox";
 
 type BentoGalleryProps = {
   items: readonly GalleryItem[];
@@ -23,6 +23,21 @@ export function BentoGallery({ items, className }: BentoGalleryProps) {
   const reduce = useReducedMotion();
   const list = items.slice(0, 6);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  // La visionneuse charge la variante HD (full), pas la miniature de grille.
+  const lightboxItems = useMemo<LightboxItem[]>(
+    () =>
+      list.map((g) => ({
+        id: g.id,
+        src: g.full,
+        alt: g.alt,
+        caption: g.caption,
+        service: g.service,
+        width: g.width,
+        height: g.height,
+      })),
+    [list],
+  );
 
   // Pattern bento desktop (grid 4 colonnes, 3 rangées) :
   //   [ 1 . 1 . ][ 2 ][ 3 ]
@@ -123,7 +138,7 @@ export function BentoGallery({ items, className }: BentoGalleryProps) {
       </ul>
 
       <Lightbox
-        items={list}
+        items={lightboxItems}
         index={openIndex}
         onClose={() => setOpenIndex(null)}
         onChange={setOpenIndex}
